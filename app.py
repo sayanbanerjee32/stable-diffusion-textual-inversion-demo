@@ -52,7 +52,7 @@ with gr.Blocks() as demo:
     generate_btn.click(fn = generate_images, inputs= inputs, outputs = outputs)
 
 # for collab
-demo.launch(debug=True)
+# demo.launch(debug=True)
 
-# if __name__ == '__main__':
-#     demo.launch()
+if __name__ == '__main__':
+    demo.launch()
