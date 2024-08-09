@@ -3,7 +3,7 @@
 ## Objective
 
 1. select 5 different styles from "community-created SD concepts library" and show output for the same prompt using these 5 different styles.
-2. implement a varient of additional guidance loss and generate images using the same promts used above to show differences. An example of such loss is `blue_loss` - when applied the generated images will be saturated with blue colour.
+2. implement a variant of additional guidance loss and generate images using the same prompts used above to show differences. An example of such loss is `blue_loss` - when applied the generated images will be saturated with blue colour.
 3. Convert this to HuggingFace Spaces app.
 
 ## Steps
@@ -80,8 +80,8 @@ Example with image-text similarity with additional prompt of "White background"
 ![image](https://github.com/user-attachments/assets/2e29b5cd-b7d5-4e56-a28d-8ea8b144e5c0)
 
 
-- The app takes a prompt and number of ingerence steps as input 
-- It provides a dropdown for 5 of the styles mentioned. This is a multi select dropdown.
+- The app takes a prompt and number of inference steps as input 
+- It provides a dropdown for 5 of the styles mentioned. This is a multi-select dropdown.
   1. [birb-style](https://huggingface.co/sd-concepts-library/birb-style)  
   2. [cute-game-style](https://huggingface.co/sd-concepts-library/cute-game-style)  
   3. [depthmap](https://huggingface.co/sd-concepts-library/depthmap)  
@@ -91,11 +91,11 @@ Example with image-text similarity with additional prompt of "White background"
 - The app provides an option of target size for generated images. There are 3 options
   1. 512x512 - best quality but very slow
   2. 256x256 - not good quality but still slow 
-  3. 128x128 - poor quality  but faster
-- The app provides option to select the loss to be applied - Hue loss or Text-Image similarity loss. If Text-Image Similarity loss is selected then the app takes the additional guidence prompt as input as well.
+  3. 128x128 - poor quality but faster
+- The app provides option to select the loss to be applied - Hue loss or Text-Image similarity loss. If Text-Image Similarity loss is selected, then the app takes the additional guidance prompt as input as well.
 
 ## Challenges
-1. While implementing Hue loss was straight forward, implemention of image-text similarity loss was not easy due to the loss calculation in the image space.
-2. The inference timing on CPU is very high. Different options were explored without much of success. Using a lower image size for generated image is some what useful but that compromises the quality to a great extent
+1. While implementing Hue loss was straight forward, implementation of image-text similarity loss was not easy due to the loss calculation is dependent on the encoding of image and additional guidance text using CLIP model (pre-trained). 
+2. The inference timing on CPU is very high. Different options were explored without much of success. Using a lower image size for generated image is some what useful but that compromises the quality to a great extent. Having a GPU for inferencing can solve this problem, but that comes with a cost.
 
 
