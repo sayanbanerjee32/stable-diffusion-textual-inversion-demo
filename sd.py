@@ -235,8 +235,14 @@ def generate_images(prompt, num_inference_steps, stl_list, img_size, loss_fn_opt
                                     hight_width = height_width)
         wo_guide_lst.append((pil_im,stl))
 
+        # defaults
+        loss_scale = 200
+        guidance_scale = 7.5
+
         if loss_fn == text_image_similarity_loss and text_loss_text is not None:
             loss_fn = partial(text_image_similarity_loss, target_text = text_loss_text)
+            loss_scale = 50
+            guidance_scale = 20
 
         pil_im = generate_with_embs(modified_output_embeddings,
                                     num_inference_steps = num_inference_steps,
@@ -244,6 +250,8 @@ def generate_images(prompt, num_inference_steps, stl_list, img_size, loss_fn_opt
                                     loss_fn = loss_fn,
                                     additional_guidence = True,
                                     hight_width = height_width,
+                                    loss_scale = loss_scale,
+                                    guidance_scale = guidance_scale,
                                     seed_value = i)
         guide_lst.append((pil_im,stl))
 
