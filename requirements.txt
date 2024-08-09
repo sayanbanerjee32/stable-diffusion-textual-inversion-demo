@@ -6,3 +6,4 @@ diffusers
 huggingface_hub
 numpy
 accelerate
+open_clip_torch
