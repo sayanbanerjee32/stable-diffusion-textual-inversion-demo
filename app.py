@@ -5,8 +5,8 @@ from sd import (stl_list,
                 generate_images)
 
 with gr.Blocks() as demo:
-    gr.HTML("<h1 align = 'center'> Stable Diffusion - Text Inversion and additional guidance</h1>")
-    gr.HTML("<h4 align = 'center'> Generates imgaes based on the prompt and 5 different styles and then with additional guidance</h4>")
+    gr.HTML("<h1 align = 'center'> Stable Diffusion - Textual Inversion and additional guidance</h1>")
+    gr.HTML("<h4 align = 'center'> Generates images based on the prompt and 5 different styles and then with additional guidance</h4>")
     gr.HTML("<h6 align = 'center'> !! The image generation may take 5 to 10 minutes on CPU per image !!</h4>")
 
     with gr.Row():
