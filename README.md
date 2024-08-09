@@ -73,14 +73,29 @@ See few examples of generated images with additional guidance prompt of "Low qua
 
 The app is available [here](https://huggingface.co/spaces/sayanbanerjee32/stable-diffusion-textual-inversion-demo)
 
+Example with Hue loss  
 ![image](https://github.com/user-attachments/assets/baf27ccd-fc00-4431-8899-7bc320c89539)
 
+Example with image-text similarity with additional prompt of "White background"  
+![image](https://github.com/user-attachments/assets/2e29b5cd-b7d5-4e56-a28d-8ea8b144e5c0)
 
-- The app provides a set of images to search from. These images are sourced from scikit-learn image
-- It takes free text as input for image search
-- Displays the most suitable image from the given image as output
+
+- The app takes a prompt and number of ingerence steps as input 
+- It provides a dropdown for 5 of the styles mentioned. This is a multi select dropdown.
+  1. [birb-style](https://huggingface.co/sd-concepts-library/birb-style)  
+  2. [cute-game-style](https://huggingface.co/sd-concepts-library/cute-game-style)  
+  3. [depthmap](https://huggingface.co/sd-concepts-library/depthmap)  
+  4. [line-art](https://huggingface.co/sd-concepts-library/line-art)  
+  5. [low-poly-hd-logos-icons](https://huggingface.co/sd-concepts-library/low-poly-hd-logos-icons)  
+
+- The app provides an option of target size for generated images. There are 3 options
+  1. 512x512 - best quality but very slow
+  2. 256x256 - not good quality but still slow 
+  3. 128x128 - poor quality  but faster
+- The app provides option to select the loss to be applied - Hue loss or Text-Image similarity loss. If Text-Image Similarity loss is selected then the app takes the additional guidence prompt as input as well.
 
 ## Challenges
-1. While implementing Hue loss was straight forward, implemention of image-text similarity loss was not easy due to the loss calculation in the omage space.
+1. While implementing Hue loss was straight forward, implemention of image-text similarity loss was not easy due to the loss calculation in the image space.
+2. The inference timing on CPU is very high. Different options were explored without much of success. Using a lower image size for generated image is some what useful but that compromises the quality to a great extent
 
 
