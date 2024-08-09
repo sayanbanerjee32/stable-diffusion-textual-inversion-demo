@@ -3,3 +3,4 @@ torch
 transformers
 diffusers
 huggingface_hub
+numpy
