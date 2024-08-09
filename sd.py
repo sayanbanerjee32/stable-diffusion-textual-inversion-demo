@@ -8,6 +8,9 @@ from transformers import CLIPTextModel, CLIPTokenizer, logging
 import os
 
 from hue_loss import hue_loss
+from text_image_similarity_loss import text_image_similarity_loss
+
+from functools import partial
 
 
 torch.manual_seed(1)
@@ -41,6 +44,10 @@ img_size_opt_dict = {
     "128x128 - poor quality  but faster" : (128,128),
     }
 
+loss_fn_dict = {
+    'Hue Loss': hue_loss,
+    'Text-Image Similarity Loss': text_image_similarity_loss,
+}
 # Load the autoencoder model which will be used to decode the latents into image space.
 vae = AutoencoderKL.from_pretrained("CompVis/stable-diffusion-v1-4", subfolder="vae")
 
@@ -188,10 +195,12 @@ pos_emb_layer = text_encoder.text_model.embeddings.position_embedding
 position_ids = text_encoder.text_model.embeddings.position_ids[:, :77]
 position_embeddings = pos_emb_layer(position_ids)
 
-def generate_images(prompt, num_inference_steps, stl_list, img_size):
+
+def generate_images(prompt, num_inference_steps, stl_list, img_size, loss_fn_option, text_loss_text = None):
     ### add a statis text that will contain the style
     prompt = prompt + ' in the style of puppy'
     height_width = img_size_opt_dict[img_size]
+    loss_fn = loss_fn_dict[loss_fn_option]
     # Tokenize
     text_input = tokenizer(prompt, padding="max_length",
                         max_length=tokenizer.model_max_length,
@@ -226,10 +235,13 @@ def generate_images(prompt, num_inference_steps, stl_list, img_size):
                                     hight_width = height_width)
         wo_guide_lst.append((pil_im,stl))
 
+        if loss_fn == text_image_similarity_loss and text_loss_text is not None:
+            loss_fn = partial(text_image_similarity_loss, target_text = text_loss_text)
+
         pil_im = generate_with_embs(modified_output_embeddings,
                                     num_inference_steps = num_inference_steps,
                                     text_input = text_input,
-                                    loss_fn = hue_loss,
+                                    loss_fn = loss_fn,
                                     additional_guidence = True,
                                     hight_width = height_width,
                                     seed_value = i)
