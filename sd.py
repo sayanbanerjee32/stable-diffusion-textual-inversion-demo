@@ -1,17 +1,8 @@
-from base64 import b64encode
-import gradio as gr
 import numpy
 import torch
 from diffusers import AutoencoderKL, LMSDiscreteScheduler, UNet2DConditionModel
 
-
-# For video display:
-from IPython.display import HTML
-from matplotlib import pyplot as plt
-from pathlib import Path
 from PIL import Image
-from torch import autocast
-from torchvision import transforms as tfms
 from tqdm.auto import tqdm
 from transformers import CLIPTextModel, CLIPTokenizer, logging
 import os
