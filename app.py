@@ -58,12 +58,12 @@ with gr.Blocks() as demo:
     with gr.Row():
         with gr.Column(scale=2):
             wo_add_guide = gr.Gallery(
-            label="Without additional guidence", show_label=True, elem_id="gallery"
+            label="Without guidance", show_label=True, elem_id="gallery"
             , columns=[3], rows=[2], object_fit="contain", height="auto")
 
         with gr.Column(scale=2):
             add_guide = gr.Gallery(
-            label="With hue loss guidence", show_label=True, elem_id="gallery"
+            label="With guidance", show_label=True, elem_id="gallery"
             , columns=[3], rows=[2], object_fit="contain", height="auto")
         outputs  = [wo_add_guide, add_guide ]
     generate_btn.click(fn = generate_images, inputs= inputs, outputs = outputs)
